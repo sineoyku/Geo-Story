@@ -9,15 +9,26 @@
     integrity="sha256-20nQCchB9co0qIjJZRGuk2/Z9VM+kNiyxNV1lvTlZBo="
     crossorigin=""></script>
 
-    <script src="script.js"></script>
-    
     <link rel="stylesheet" href="style.css"/>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@fortawesome/fontawesome-free@6.6.0/css/fontawesome.min.css" integrity="sha384-NvKbDTEnL+A8F/AA5Tc5kmMLSJHUO868P+lDtTpJIeQdGYaUIuLr4lVGOEA1OcMy" crossorigin="anonymous">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=TikTok+Sans:opsz,wght@12..36,300..900&display=swap" rel="stylesheet">
     </head>
 
     <body>
-    <h1>Geo Story</h1>
-    <p>Eternalize your story.</p>  
-    <div id="map"></div>
+    <section class="header">
+        <nav>
+            <a href="index.html"><img src="images/logo.jpg"></a>
+            <div class="nav-links" id="navLinks">
+                <ul>
+                    <li> <a href="">LOG IN</a></li>
+                    <li><a href="">SIGN UP</a></li>
+                </ul>
+            </div>
+        </nav>
+            <div id="map"></div>
+    </section> 
 
     <script>
     const map = 
@@ -27,6 +38,20 @@
     maxZoom: 19,
     attribution: '&copy; <a href="http://www.openstreetmap.org/copyright">OpenStreetMap</a>'
     }).addTo(map);
+
+    var marker = L.marker([51.5, -0.09]).addTo(map);
+    marker.bindPopup("<b>Share your story on the map!</b>").openPopup();
+
+    var popup = L.popup();
+
+    function onMapClick(e) {
+        popup
+            .setLatLng(e.latlng)
+            .setContent("<b>Sign in to start sharing with the community.</b>")
+            .openOn(map);
+    }
+
+    map.on('click', onMapClick);
     </script>
 
     </body>
